@@ -1,0 +1,5 @@
+E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Debug/CMakeFiles/Six-in-a-row.dir
+E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
+E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
+E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Debug/CMakeFiles/Six-in-a-row_autogen_timestamp_deps.dir
+E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Debug/CMakeFiles/Six-in-a-row_autogen.dir
