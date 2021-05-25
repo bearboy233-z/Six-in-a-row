@@ -85,20 +85,6 @@ void Widget::paintEvent(QPaintEvent *event)
         }
     }
     }
-
-    //绘制gg
-    if (game->gameStatus==BLACKWIN||game->gameStatus==WHITEWIN)
-    {
-        if (game->gameMode==PvP)
-        {
-            if (game->gameStatus==BLACKWIN) {}
-            if (game->gameStatus==WHITEWIN) {}
-        }
-        else {
-            if (game->AITurn) {}
-                else {}
-        }
-    }
 }
 
 //鼠标点击模糊判定
@@ -157,8 +143,14 @@ void Widget::mouseReleaseEvent(QMouseEvent *event)
     if (!rightMousePos) return;
     if (game->gameMode==PvE&&game->AITurn) chessByAI();
         else chessByPerson();
-    game->judge(mousePosRow,mousePosCol);
-    update();
+
+    //gg
+    if (game->gameStatus==BLACKWIN||game->gameStatus==WHITEWIN||game->gameStatus==DRAW)
+    {
+        if (game->gameStatus==DRAW) game->gameWindows->msg_Draw();
+            else game->gameWindows->msg_End(game->gameStatus,game->gameMode,game->AITurn);
+    }
+
     rightMousePos=false;
 
     //换手

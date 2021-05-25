@@ -31,8 +31,11 @@ set(PROJECT_SOURCES
         main.cpp
         widget.cpp
         GameModel.cpp
+        GameWindows.cpp
         widget.h
         GameModel.h
+        GameWindows.h
+        BaseParameter.h
         widget.ui
 )
 

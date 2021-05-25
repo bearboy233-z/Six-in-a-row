@@ -1,8 +1,10 @@
 #ifndef WIDGET_H
 #define WIDGET_H
+
 #include "GameModel.h"
 
 #include <QWidget>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }

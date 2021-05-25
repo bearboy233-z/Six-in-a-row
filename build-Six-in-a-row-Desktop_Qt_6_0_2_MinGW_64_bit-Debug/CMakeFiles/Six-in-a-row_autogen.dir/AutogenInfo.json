@@ -192,9 +192,19 @@
 	"HEADERS" : 
 	[
 		[
+			"E:/Six-in-a-row/Six-in-a-row/BaseParameter.h",
+			"MU",
+			"EWIEGA46WW/moc_BaseParameter.cpp"
+		],
+		[
 			"E:/Six-in-a-row/Six-in-a-row/GameModel.h",
 			"MU",
 			"EWIEGA46WW/moc_GameModel.cpp"
+		],
+		[
+			"E:/Six-in-a-row/Six-in-a-row/GameWindows.h",
+			"MU",
+			"EWIEGA46WW/moc_GameWindows.cpp"
 		],
 		[
 			"E:/Six-in-a-row/Six-in-a-row/widget.h",
@@ -267,6 +277,7 @@
 	"SOURCES" : 
 	[
 		[ "E:/Six-in-a-row/Six-in-a-row/GameModel.cpp", "MU" ],
+		[ "E:/Six-in-a-row/Six-in-a-row/GameWindows.cpp", "MU" ],
 		[ "E:/Six-in-a-row/Six-in-a-row/main.cpp", "MU" ],
 		[ "E:/Six-in-a-row/Six-in-a-row/widget.cpp", "MU" ]
 	],

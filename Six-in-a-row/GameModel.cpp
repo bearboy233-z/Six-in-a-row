@@ -102,5 +102,5 @@ void GameModel::judge(int row, int col)
 
 void GameModel::AIchess(int *row, int *col)
 {
-
+    //待完成
 }

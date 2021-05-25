@@ -91,7 +91,10 @@ E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Debug/Six-in-a-
   E:/Qt/6.0.2/mingw81_64/include/QtGui/qtransform.h \
   E:/Qt/6.0.2/mingw81_64/include/QtGui/qwindowdefs.h \
   E:/Qt/6.0.2/mingw81_64/include/QtGui/qwindowdefs_win.h \
+  E:/Qt/6.0.2/mingw81_64/include/QtWidgets/QMessageBox \
   E:/Qt/6.0.2/mingw81_64/include/QtWidgets/QWidget \
+  E:/Qt/6.0.2/mingw81_64/include/QtWidgets/qdialog.h \
+  E:/Qt/6.0.2/mingw81_64/include/QtWidgets/qmessagebox.h \
   E:/Qt/6.0.2/mingw81_64/include/QtWidgets/qsizepolicy.h \
   E:/Qt/6.0.2/mingw81_64/include/QtWidgets/qtwidgets-config.h \
   E:/Qt/6.0.2/mingw81_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -286,4 +289,6 @@ E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Debug/Six-in-a-
   E:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include/vadefs.h \
   E:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include/wchar.h \
   E:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include/wctype.h \
-  E:/Six-in-a-row/Six-in-a-row/GameModel.h
+  E:/Six-in-a-row/Six-in-a-row/BaseParameter.h \
+  E:/Six-in-a-row/Six-in-a-row/GameModel.h \
+  E:/Six-in-a-row/Six-in-a-row/GameWindows.h

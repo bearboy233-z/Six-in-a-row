@@ -75,6 +75,14 @@ build CMakeFiles/Six-in-a-row.dir/GameModel.cpp.obj: CXX_COMPILER__Six-in-a-row_
   OBJECT_DIR = CMakeFiles\Six-in-a-row.dir
   OBJECT_FILE_DIR = CMakeFiles\Six-in-a-row.dir
 
+build CMakeFiles/Six-in-a-row.dir/GameWindows.cpp.obj: CXX_COMPILER__Six-in-a-row_Debug E$:/Six-in-a-row/Six-in-a-row/GameWindows.cpp || cmake_object_order_depends_target_Six-in-a-row
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0601 -D_WIN64
+  DEP_FILE = CMakeFiles\Six-in-a-row.dir\GameWindows.cpp.obj.d
+  FLAGS = -g -std=gnu++17
+  INCLUDES = -I. -IE:/Six-in-a-row/Six-in-a-row -ISix-in-a-row_autogen/include -isystem E:/Qt/6.0.2/mingw81_64/include/QtCore -isystem E:/Qt/6.0.2/mingw81_64/include -isystem E:/Qt/6.0.2/mingw81_64/mkspecs/win32-g++ -isystem E:/Qt/6.0.2/mingw81_64/include/QtWidgets -isystem E:/Qt/6.0.2/mingw81_64/include/QtGui
+  OBJECT_DIR = CMakeFiles\Six-in-a-row.dir
+  OBJECT_FILE_DIR = CMakeFiles\Six-in-a-row.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Six-in-a-row
@@ -83,7 +91,7 @@ build CMakeFiles/Six-in-a-row.dir/GameModel.cpp.obj: CXX_COMPILER__Six-in-a-row_
 #############################################
 # Link the executable Six-in-a-row.exe
 
-build Six-in-a-row.exe: CXX_EXECUTABLE_LINKER__Six-in-a-row_Debug CMakeFiles/Six-in-a-row.dir/Six-in-a-row_autogen/mocs_compilation.cpp.obj CMakeFiles/Six-in-a-row.dir/main.cpp.obj CMakeFiles/Six-in-a-row.dir/widget.cpp.obj CMakeFiles/Six-in-a-row.dir/GameModel.cpp.obj | E$:/Qt/6.0.2/mingw81_64/lib/libQt6Widgets.a E$:/Qt/6.0.2/mingw81_64/lib/libQt6Gui.a E$:/Qt/6.0.2/mingw81_64/lib/libQt6Core.a || Six-in-a-row_autogen Six-in-a-row_autogen_timestamp_deps
+build Six-in-a-row.exe: CXX_EXECUTABLE_LINKER__Six-in-a-row_Debug CMakeFiles/Six-in-a-row.dir/Six-in-a-row_autogen/mocs_compilation.cpp.obj CMakeFiles/Six-in-a-row.dir/main.cpp.obj CMakeFiles/Six-in-a-row.dir/widget.cpp.obj CMakeFiles/Six-in-a-row.dir/GameModel.cpp.obj CMakeFiles/Six-in-a-row.dir/GameWindows.cpp.obj | E$:/Qt/6.0.2/mingw81_64/lib/libQt6Widgets.a E$:/Qt/6.0.2/mingw81_64/lib/libQt6Gui.a E$:/Qt/6.0.2/mingw81_64/lib/libQt6Core.a || Six-in-a-row_autogen Six-in-a-row_autogen_timestamp_deps
   FLAGS = -g
   LINK_LIBRARIES = E:/Qt/6.0.2/mingw81_64/lib/libQt6Widgets.a  E:/Qt/6.0.2/mingw81_64/lib/libQt6Gui.a  E:/Qt/6.0.2/mingw81_64/lib/libQt6Core.a  -lmpr  -luserenv  -ld3d11  -ldxgi  -ldxguid  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Six-in-a-row.dir
@@ -143,7 +151,7 @@ build Six-in-a-row_autogen/timestamp: CUSTOM_COMMAND E$:/Qt/6.0.2/mingw81_64/bin
 #############################################
 # Phony custom command for CMakeFiles\Six-in-a-row_autogen_timestamp_deps
 
-build CMakeFiles/Six-in-a-row_autogen_timestamp_deps: phony E$:/Qt/6.0.2/mingw81_64/bin/Qt6Widgets.dll E$:/Qt/6.0.2/mingw81_64/bin/moc.exe E$:/Qt/6.0.2/mingw81_64/bin/Qt6Core.dll E$:/Qt/6.0.2/mingw81_64/bin/uic.exe
+build CMakeFiles/Six-in-a-row_autogen_timestamp_deps: phony E$:/Qt/6.0.2/mingw81_64/bin/Qt6Widgets.dll E$:/Qt/6.0.2/mingw81_64/bin/uic.exe E$:/Qt/6.0.2/mingw81_64/bin/Qt6Core.dll E$:/Qt/6.0.2/mingw81_64/bin/moc.exe
 
 
 #############################################
