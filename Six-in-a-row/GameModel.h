@@ -14,8 +14,9 @@ enum GameStatus
 {
     unknownStatus,
     PLAYING,
-    WIN,
-    LOSE
+    BLACKWIN,
+    WHITEWIN,
+    DRAW
 };
 
 //下棋方
@@ -69,6 +70,9 @@ class GameModel
         //<ai>落子权值
         int chessValue[LINE_NUM-1][LINE_NUM-1];
 
+        //落子总数
+        int chessNum;
+
         //计算两点间距离
         static double len(int x1,int y1,int x2,int y2);
 
@@ -77,6 +81,12 @@ class GameModel
 
         //落子
         void move_in_chess(int row,int col);
+
+        //判断输赢
+        void judge(int row,int col);
+
+        //<ai>ai下棋
+        void AIchess(int *row,int *col);
 };
 
 #endif // GAMEMODEL_H

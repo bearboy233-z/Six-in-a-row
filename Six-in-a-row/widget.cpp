@@ -52,6 +52,8 @@ void Widget::paintEvent(QPaintEvent *event)
     }
 
     //绘制鼠标点击提示标记
+    if (game->gameStatus==PLAYING)
+    {
     if (rightMousePos)
     {
         if (game->playerTurn==blackturn) painter.setPen(QPen(Qt::black,1.5));
@@ -65,8 +67,11 @@ void Widget::paintEvent(QPaintEvent *event)
         painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE-MARK_CORNER,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE);
         painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE-MARK_CORNER);
     }
+    }
 
     //绘制棋子
+    if (game->gameStatus!=unknownStatus)
+    {
     for (int i=0;i<LINE_NUM;i++)
     for (int j=0;j<LINE_NUM;j++)
     {
@@ -79,6 +84,21 @@ void Widget::paintEvent(QPaintEvent *event)
             painter.drawPixmap(EDGE+j*BLOCK_SIZE-15,EDGE+i*BLOCK_SIZE-15,white_chess);
         }
     }
+    }
+
+    //绘制gg
+    if (game->gameStatus==BLACKWIN||game->gameStatus==WHITEWIN)
+    {
+        if (game->gameMode==PvP)
+        {
+            if (game->gameStatus==BLACKWIN) {}
+            if (game->gameStatus==WHITEWIN) {}
+        }
+        else {
+            if (game->AITurn) {}
+                else {}
+        }
+    }
 }
 
 //鼠标点击模糊判定
@@ -87,6 +107,8 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
     int x=event->x();
     int y=event->y();
 
+    if (game->gameStatus==PLAYING)
+    {
     if (x>EDGE-BLOCK_SIZE*0.5&&x<size().width()-EDGE+BLOCK_SIZE*0.5&&
             y>EDGE-BLOCK_SIZE*0.5&&y<size().height()-EDGE+BLOCK_SIZE*0.5)
     {
@@ -127,7 +149,7 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
         }
     }
     update();//重绘
-
+    }
 }
 
 void Widget::mouseReleaseEvent(QMouseEvent *event)
@@ -135,24 +157,34 @@ void Widget::mouseReleaseEvent(QMouseEvent *event)
     if (!rightMousePos) return;
     if (game->gameMode==PvE&&game->AITurn) chessByAI();
         else chessByPerson();
+    game->judge(mousePosRow,mousePosCol);
+    update();
     rightMousePos=false;
+
+    //换手
     if (game->playerTurn==blackturn) game->playerTurn=whiteturn;
         else game->playerTurn=blackturn;
+    if (game->gameMode==PvE)
+    {
+        if (game->AITurn) game->AITurn=false;
+            else game->AITurn=true;
+    }
 }
 
 void Widget::initGame()
 {
     game=new GameModel;
+    game->chessNum=0;
     srand(time(0));
-    initPvPGame();
+    initPvPGame();//pve未启用，暂时默认pvp
 }
 
 void Widget::initPvPGame()
 {
     game_mode=PvP;
     game->gameStatus=PLAYING;
-    game->startGame(game_mode);
     game->AITurn=false;
+    game->startGame(game_mode);
     update();
 }
 
@@ -160,9 +192,9 @@ void Widget::initPvEGame()
 {
     game_mode=PvE;
     game->gameStatus=PLAYING;
-    game->startGame(game_mode);
     game->AITurn=false;
     if (rand()%2) game->AITurn=true;
+    game->startGame(game_mode);
     update();
 }
 
@@ -176,5 +208,12 @@ void Widget::chessByPerson()
 
 void Widget::chessByAI()
 {
+    //模拟ai思考时间
+    clock_t now=clock();
+    while (clock()-now<AI_THINK_TIME);
+
+    game->AIchess(&mousePosRow,&mousePosCol);
+    game->move_in_chess(mousePosRow,mousePosCol);
     update();
+    game->AITurn=false;
 }
