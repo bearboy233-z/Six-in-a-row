@@ -23,6 +23,7 @@ void GameModel::startGame(GameMode mode)
 
 void GameModel::move_in_chess(int row, int col)
 {
+    if (!(row>=0&&row<LINE_NUM&&col>=0&&col<LINE_NUM)) return;
     chessNum++;
     if (playerTurn==blackturn) chessPiece[row][col]=black;
     if (playerTurn==whiteturn) chessPiece[row][col]=white;
@@ -34,6 +35,7 @@ void GameModel::judge(int row, int col)
     bool win=false;
     for (int i=-5;i<=0;i++)
     {
+        if (row+i<0||row+i+5>=LINE_NUM) continue;
         bool cont=true;
         for (int j=0;j<6;j++)
             if (chessPiece[row+i+j][col]!=chessPiece[row][col]){
@@ -47,6 +49,7 @@ void GameModel::judge(int row, int col)
     }
     for (int i=-5;i<=0;i++)
     {
+        if (col+i<0||col+i+5>=LINE_NUM) continue;
         bool cont=true;
         for (int j=0;j<6;j++)
             if (chessPiece[row][col+i+j]!=chessPiece[row][col]){
@@ -60,6 +63,8 @@ void GameModel::judge(int row, int col)
     }
     for (int i=-5;i<=0;i++)
     {
+        if (row+i<0||row+i+5>=LINE_NUM) continue;
+        if (col+i<0||col+i+5>=LINE_NUM) continue;
         bool cont=true;
         for (int j=0;j<6;j++)
             if (chessPiece[row+i+j][col+i+j]!=chessPiece[row][col]){
@@ -73,6 +78,8 @@ void GameModel::judge(int row, int col)
     }
     for (int i=-5;i<=0;i++)
     {
+        if (row+i<0||row+i+5>=LINE_NUM) continue;
+        if (col-i-5<0||col-i>=LINE_NUM) continue;
         bool cont=true;
         for (int j=0;j<6;j++)
             if (chessPiece[row+i+j][col-i-j]!=chessPiece[row][col]){

@@ -138,6 +138,7 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
     }
 }
 
+//鼠标点击
 void Widget::mouseReleaseEvent(QMouseEvent *event)
 {
     if (!rightMousePos) return;
