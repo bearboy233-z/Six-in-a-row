@@ -24,17 +24,23 @@ private:
     GameModel *game;
     GameMode game_mode;
 
+    //鼠标
     int mousePosRow,mousePosCol;//鼠标所在行列
     bool rightMousePos=false;//是否是合法的选中位置
+    bool mousePosPvP,mousePosPvE;//鼠标在按钮上
+    bool mouseClickPvP,mouseClickPvE;//鼠标点击按钮
 
-    //绘制棋盘
+    //绘制
     void paintEvent(QPaintEvent *event);
 
-    //鼠标点击模糊判定
+    //鼠标位置
     void mouseMoveEvent(QMouseEvent *event);
 
-    //落子
+    //鼠标点击
     void mouseReleaseEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+
+    //落子
     void chessByPerson();
     void chessByAI();
 
