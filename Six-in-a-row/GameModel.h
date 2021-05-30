@@ -14,25 +14,25 @@ class GameModel
         GameWindows *gameWindows;
 
         //游戏模式
-        GameMode gameMode;
+        GameMode gameMode=unknownMode;
 
         //游戏状态
-        GameStatus gameStatus;
+        GameStatus gameStatus=unknownStatus;
 
         //下棋方
-        PlayerTurn playerTurn;
+        PlayerTurn playerTurn=blackturn;
 
         //棋盘落子情况
-        ChessPiece chessPiece[LINE_NUM][LINE_NUM];
+        ChessPiece chessPiece[LINE_NUM][LINE_NUM]={null};
 
         //<ai>轮到ai
-        bool AITurn;
+        bool AITurn=false;
 
         //<ai>落子权值
-        int chessValue[LINE_NUM][LINE_NUM];
+        int chessValue[LINE_NUM][LINE_NUM]={0};
 
         //落子总数
-        int chessNum;
+        int chessNum=0;
 
         //启动游戏
         void startGame(GameMode mode);
@@ -45,6 +45,7 @@ class GameModel
 
         //<ai>ai下棋
         void AIchess(int *row,int *col);
+        void getvalue();
 
         //计算两点间距离
         static double len(int x1,int y1,int x2,int y2);

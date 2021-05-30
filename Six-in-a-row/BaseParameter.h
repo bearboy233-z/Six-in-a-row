@@ -44,6 +44,4 @@ const int POS_OFFSET=BLOCK_SIZE*0.35;           //鼠标点击模糊判定上限
 const int MARK_SIZE=BLOCK_SIZE*0.4;             //鼠标点击提示标记大小
 const int MARK_CORNER=MARK_SIZE/4;              //鼠标点击提示角标大小
 
-const int AI_THINK_TIME=1000;                   //ai模拟思考时间
-
 #endif // BASEPARAMETER_H

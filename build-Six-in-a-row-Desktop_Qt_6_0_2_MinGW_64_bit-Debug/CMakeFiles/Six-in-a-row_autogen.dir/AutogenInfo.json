@@ -189,29 +189,7 @@
 	"CMAKE_SOURCE_DIR" : "E:/Six-in-a-row/Six-in-a-row",
 	"DEP_FILE" : "E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Debug/Six-in-a-row_autogen/deps",
 	"DEP_FILE_RULE_NAME" : "Six-in-a-row_autogen/timestamp",
-	"HEADERS" : 
-	[
-		[
-			"E:/Six-in-a-row/Six-in-a-row/BaseParameter.h",
-			"MU",
-			"EWIEGA46WW/moc_BaseParameter.cpp"
-		],
-		[
-			"E:/Six-in-a-row/Six-in-a-row/GameModel.h",
-			"MU",
-			"EWIEGA46WW/moc_GameModel.cpp"
-		],
-		[
-			"E:/Six-in-a-row/Six-in-a-row/GameWindows.h",
-			"MU",
-			"EWIEGA46WW/moc_GameWindows.cpp"
-		],
-		[
-			"E:/Six-in-a-row/Six-in-a-row/widget.h",
-			"MU",
-			"EWIEGA46WW/moc_widget.cpp"
-		]
-	],
+	"HEADERS" : [],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
 	"INCLUDE_DIR" : "E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Debug/Six-in-a-row_autogen/include",
 	"MOC_COMPILATION_FILE" : "E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Debug/Six-in-a-row_autogen/mocs_compilation.cpp",
@@ -274,13 +252,7 @@
 	"QT_VERSION_MAJOR" : 6,
 	"QT_VERSION_MINOR" : 0,
 	"SETTINGS_FILE" : "E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Debug/CMakeFiles/Six-in-a-row_autogen.dir/AutogenUsed.txt",
-	"SOURCES" : 
-	[
-		[ "E:/Six-in-a-row/Six-in-a-row/GameModel.cpp", "MU" ],
-		[ "E:/Six-in-a-row/Six-in-a-row/GameWindows.cpp", "MU" ],
-		[ "E:/Six-in-a-row/Six-in-a-row/main.cpp", "MU" ],
-		[ "E:/Six-in-a-row/Six-in-a-row/widget.cpp", "MU" ]
-	],
+	"SOURCES" : [],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],
 	"UIC_SKIP" : [],

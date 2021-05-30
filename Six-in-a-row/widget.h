@@ -22,13 +22,13 @@ private:
     Ui::Widget *ui;
 
     GameModel *game;
-    GameMode game_mode;
+    GameMode game_mode=unknownMode;
 
     //鼠标
-    int mousePosRow,mousePosCol;//鼠标所在行列
+    int mousePosRow=-1,mousePosCol=-1;//鼠标所在行列
     bool rightMousePos=false;//是否是合法的选中位置
-    bool mousePosPvP,mousePosPvE;//鼠标在按钮上
-    bool mouseClickPvP,mouseClickPvE;//鼠标点击按钮
+    bool mousePosPvP=false,mousePosPvE=false;//鼠标在按钮上
+    bool mouseClickPvP=false,mouseClickPvE=false;//鼠标点击按钮
 
     //绘制
     void paintEvent(QPaintEvent *event);

@@ -10,6 +10,7 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS "-mwindows")
 
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check https://doc.qt.io/qt/deployment-android.html for more information.
@@ -37,6 +38,7 @@ set(PROJECT_SOURCES
         GameWindows.h
         BaseParameter.h
         widget.ui
+        Six-in-a-row.rc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

@@ -20,6 +20,7 @@ Widget::Widget(QWidget *parent)
     //窗口大小
     setFixedSize(EDGE*2+BLOCK_SIZE*BLOCK_NUM,EDGE*2+BLOCK_SIZE*BLOCK_NUM);
 
+    game=new GameModel;
     //初始化
     initGame();
 
@@ -264,8 +265,7 @@ void Widget::mouseReleaseEvent(QMouseEvent *event)
     //落子
     if (game->gameStatus==PLAYING&&rightMousePos)
     {
-    if (game->gameMode==PvE&&game->AITurn) chessByAI();
-        else chessByPerson();
+    if (!game->AITurn) chessByPerson();
 
     //gg
     if (game->gameStatus==BLACKWIN||game->gameStatus==WHITEWIN||game->gameStatus==DRAW)
@@ -280,10 +280,19 @@ void Widget::mouseReleaseEvent(QMouseEvent *event)
     //换手
     if (game->playerTurn==blackturn) game->playerTurn=whiteturn;
         else game->playerTurn=blackturn;
-    if (game->gameMode==PvE)
-    {
-        if (game->AITurn) game->AITurn=false;
-            else game->AITurn=true;
+    if (game->gameMode==PvE){
+        game->AITurn=true;
+        chessByAI();
+        //gg
+        if (game->gameStatus==BLACKWIN||game->gameStatus==WHITEWIN||game->gameStatus==DRAW)
+        {
+            if (game->gameStatus==DRAW) game->gameWindows->msg_Draw();
+                else game->gameWindows->msg_End(game->gameStatus,game->gameMode,game->AITurn);
+            initGame();
+        }
+        if (game->playerTurn==blackturn) game->playerTurn=whiteturn;
+            else game->playerTurn=blackturn;
+        game->AITurn=false;
     }
     }
 }
@@ -338,6 +347,11 @@ void Widget::initPvEGame()//pve未启用
     if (rand()%2) game->AITurn=true;
     game->startGame(game_mode);
     update();
+    if (game->AITurn){
+        chessByAI();
+        game->AITurn=false;
+        game->playerTurn=whiteturn;
+    }
 }
 
 void Widget::chessByPerson()
@@ -346,17 +360,12 @@ void Widget::chessByPerson()
             &&mousePosCol>=0&&mousePosCol<LINE_NUM)
         game->move_in_chess(mousePosRow,mousePosCol);
     update();
-    if (game->gameMode==PvE) game->AITurn=true;
 }
 
 void Widget::chessByAI()
 {
-    //模拟ai思考时间
-    clock_t now=clock();
-    while (clock()-now<AI_THINK_TIME);
-
-    game->AIchess(&mousePosRow,&mousePosCol);
-    game->move_in_chess(mousePosRow,mousePosCol);
+    int aiChessRow=-1,aiChessCol=-1;
+    game->AIchess(&aiChessRow,&aiChessCol);
+    game->move_in_chess(aiChessRow,aiChessCol);
     update();
-    game->AITurn=false;
 }
