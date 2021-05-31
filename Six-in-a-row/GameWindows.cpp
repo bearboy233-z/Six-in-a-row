@@ -42,7 +42,7 @@ void GameWindows::msg_Draw()
     msgBox.setText("Draw!");
     msgBox.setButtonText(QMessageBox::Ok,"好耶！");
     msgBox.setWindowTitle("和局");
-    QPixmap icon("Recouses/icon.png");//未加入图标
+    QPixmap icon("Recouses/draw.png");
     msgBox.setIconPixmap(icon);
     msgBox.exec();
 }
