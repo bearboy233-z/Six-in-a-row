@@ -173,9 +173,9 @@ void GameModel::getvalue()
                 for (h=i+1;h<=i+r;h++)
                     if (chessPiece[h][j]==null) break;
                 h--;
-                if (h-k+1>=6) tempvalue+=1919810;
-                if (h-k+1==5&&k>i-l&&h<i+r) tempvalue+=1919810;
-                if (h-k+1==5&&(k==i-l||h==i+r)) tempvalue+=10086;
+                if (h-k+1>=6) tempvalue+=19190810;
+                if (h-k+1==5&&k>i-l&&h<i+r) tempvalue+=114514;
+                if (h-k+1==5&&(k==i-l||h==i+r)) tempvalue+=1234;
                 if (h-k+1==4){
                     if (k==i-l||h==i+r) tempvalue+=10;
                     else if (k-1>i-l||h+1<i+r) tempvalue+=500;
@@ -214,9 +214,9 @@ void GameModel::getvalue()
                 for (h=i+1;h<=i+r;h++)
                     if (chessPiece[h][j]==null) break;
                 h--;
-                if (h-k+1>=6) tempvalue+=114514;
-                if (h-k+1==5&&k>i-l&&h<i+r) tempvalue+=114514;
-                if (h-k+1==5&&(k==i-l||h==i+r)) tempvalue+=10000;
+                if (h-k+1>=6) tempvalue+=1919810;
+                if (h-k+1==5&&k>i-l&&h<i+r) tempvalue+=10086;
+                if (h-k+1==5&&(k==i-l||h==i+r)) tempvalue+=1200;
                 if (h-k+1==4){
                     if (k==i-l||h==i+r) tempvalue+=20;
                     else if (k-1>i-l||h+1<i+r) tempvalue+=1000;
@@ -256,9 +256,9 @@ void GameModel::getvalue()
                 for (h=j+1;h<=j+r;h++)
                     if (chessPiece[i][h]==null) break;
                 h--;
-                if (h-k+1>=6) tempvalue+=1919810;
-                if (h-k+1==5&&k>j-l&&h<j+r) tempvalue+=1919810;
-                if (h-k+1==5&&(k==j-l||h==j+r)) tempvalue+=10086;
+                if (h-k+1>=6) tempvalue+=19190810;
+                if (h-k+1==5&&k>j-l&&h<j+r) tempvalue+=114514;
+                if (h-k+1==5&&(k==j-l||h==j+r)) tempvalue+=1234;
                 if (h-k+1==4){
                     if (k==j-l||h==j+r) tempvalue+=10;
                     else if (k-1>j-l||h+1<j+r) tempvalue+=500;
@@ -297,9 +297,9 @@ void GameModel::getvalue()
                 for (h=j+1;h<=j+r;h++)
                     if (chessPiece[i][h]==null) break;
                 h--;
-                if (h-k+1>=6) tempvalue+=114514;
-                if (h-k+1==5&&k>j-l&&h<j+r) tempvalue+=114514;
-                if (h-k+1==5&&(k==j-l||h==j+r)) tempvalue+=10000;
+                if (h-k+1>=6) tempvalue+=1919810;
+                if (h-k+1==5&&k>j-l&&h<j+r) tempvalue+=10086;
+                if (h-k+1==5&&(k==j-l||h==j+r)) tempvalue+=1200;
                 if (h-k+1==4){
                     if (k==j-l||h==j+r) tempvalue+=20;
                     else if (k-1>j-l||h+1<j+r) tempvalue+=1000;
@@ -339,9 +339,9 @@ void GameModel::getvalue()
                 for (h=i+1;h<=i+r;h++)
                     if (chessPiece[h][j-i+h]==null) break;
                 h--;
-                if (h-k+1>=6) tempvalue+=1919810;
-                if (h-k+1==5&&k>i-l&&h<i+r) tempvalue+=1919810;
-                if (h-k+1==5&&(k==i-l||h==i+r)) tempvalue+=10086;
+                if (h-k+1>=6) tempvalue+=19190810;
+                if (h-k+1==5&&k>i-l&&h<i+r) tempvalue+=114514;
+                if (h-k+1==5&&(k==i-l||h==i+r)) tempvalue+=1234;
                 if (h-k+1==4){
                     if (k==i-l||h==i+r) tempvalue+=10;
                     else if (k-1>i-l||h+1<i+r) tempvalue+=500;
@@ -380,9 +380,9 @@ void GameModel::getvalue()
                 for (h=i+1;h<=i+r;h++)
                     if (chessPiece[h][j-i+h]==null) break;
                 h--;
-                if (h-k+1>=6) tempvalue+=114514;
-                if (h-k+1==5&&k>i-l&&h<i+r) tempvalue+=114514;
-                if (h-k+1==5&&(k==i-l||h==i+r)) tempvalue+=10000;
+                if (h-k+1>=6) tempvalue+=1919810;
+                if (h-k+1==5&&k>i-l&&h<i+r) tempvalue+=10086;
+                if (h-k+1==5&&(k==i-l||h==i+r)) tempvalue+=1200;
                 if (h-k+1==4){
                     if (k==i-l||h==i+r) tempvalue+=20;
                     else if (k-1>i-l||h+1<i+r) tempvalue+=1000;
@@ -422,9 +422,9 @@ void GameModel::getvalue()
                 for (h=i+1;h<=i+r;h++)
                     if (chessPiece[h][j+i-h]==null) break;
                 h--;
-                if (h-k+1>=6) tempvalue+=1919810;
-                if (h-k+1==5&&k>i-l&&h<i+r) tempvalue+=1919810;
-                if (h-k+1==5&&(k==i-l||h==i+r)) tempvalue+=10086;
+                if (h-k+1>=6) tempvalue+=19190810;
+                if (h-k+1==5&&k>i-l&&h<i+r) tempvalue+=114514;
+                if (h-k+1==5&&(k==i-l||h==i+r)) tempvalue+=1234;
                 if (h-k+1==4){
                     if (k==i-l||h==i+r) tempvalue+=10;
                     else if (k-1>i-l||h+1<i+r) tempvalue+=500;
@@ -463,9 +463,9 @@ void GameModel::getvalue()
                 for (h=i+1;h<=i+r;h++)
                     if (chessPiece[h][j+i-h]==null) break;
                 h--;
-                if (h-k+1>=6) tempvalue+=114514;
-                if (h-k+1==5&&k>i-l&&h<i+r) tempvalue+=114514;
-                if (h-k+1==5&&(k==i-l||h==i+r)) tempvalue+=10000;
+                if (h-k+1>=6) tempvalue+=1919810;
+                if (h-k+1==5&&k>i-l&&h<i+r) tempvalue+=10086;
+                if (h-k+1==5&&(k==i-l||h==i+r)) tempvalue+=1200;
                 if (h-k+1==4){
                     if (k==i-l||h==i+r) tempvalue+=20;
                     else if (k-1>i-l||h+1<i+r) tempvalue+=1000;
