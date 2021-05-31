@@ -58,3 +58,4 @@ else()
 endif()
 
 target_link_libraries(Six-in-a-row PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Six-in-a-row PRIVATE WinMM)

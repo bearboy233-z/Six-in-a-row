@@ -8,11 +8,11 @@ void GameWindows::msg_End(GameStatus status, GameMode mode, bool aiturn)
 {
     QMessageBox msgBox;
     if (status==BLACKWIN){
-        QPixmap icon("Recouses/blackchess.png");
+        QPixmap icon("Resources/blackchess.png");
         msgBox.setIconPixmap(icon);
     }
     else {
-        QPixmap icon("Recouses/whitechess.png");
+        QPixmap icon("Resources/whitechess.png");
         msgBox.setIconPixmap(icon);
     }
     if (mode==PvP){
@@ -42,7 +42,7 @@ void GameWindows::msg_Draw()
     msgBox.setText("Draw!");
     msgBox.setButtonText(QMessageBox::Ok,"好耶！");
     msgBox.setWindowTitle("和局");
-    QPixmap icon("Recouses/draw.png");
+    QPixmap icon("Resources/draw.png");
     msgBox.setIconPixmap(icon);
     msgBox.exec();
 }

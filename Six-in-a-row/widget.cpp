@@ -7,6 +7,10 @@
 #include <math.h>
 #include <cstdlib>
 #include <QThread>
+#include <windows.h>
+#include <Mmsystem.h>
+
+using namespace std;
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -41,7 +45,7 @@ void Widget::paintEvent(QPaintEvent *event)
     //绘制棋盘
 
     //设置棋盘背景
-    QPixmap background("Recouses/chessboard.jpg");
+    QPixmap background("Resources/chessboard.jpg");
     painter.drawPixmap(this->rect(),background);
 
     //绘制网格线
@@ -59,11 +63,11 @@ void Widget::paintEvent(QPaintEvent *event)
     for (int j=0;j<LINE_NUM;j++)
     {
         if (game->chessPiece[i][j]==black){
-            QPixmap black_chess("Recouses/blackchess.png");
+            QPixmap black_chess("Resources/blackchess.png");
             painter.drawPixmap(EDGE+j*BLOCK_SIZE-15,EDGE+i*BLOCK_SIZE-15,black_chess);
         }
         if (game->chessPiece[i][j]==white){
-            QPixmap white_chess("Recouses/whitechess.png");
+            QPixmap white_chess("Resources/whitechess.png");
             painter.drawPixmap(EDGE+j*BLOCK_SIZE-15,EDGE+i*BLOCK_SIZE-15,white_chess);
         }
     }
@@ -270,6 +274,7 @@ void Widget::mouseReleaseEvent(QMouseEvent *event)
     //gg
     if (game->gameStatus==BLACKWIN||game->gameStatus==WHITEWIN||game->gameStatus==DRAW)
     {
+        PlaySound(TEXT("Resources/end.wav"),NULL,SND_FILENAME | SND_ASYNC);//音频
         if (game->gameStatus==DRAW) game->gameWindows->msg_Draw();
             else game->gameWindows->msg_End(game->gameStatus,game->gameMode,game->AITurn);
         initGame();
@@ -286,6 +291,7 @@ void Widget::mouseReleaseEvent(QMouseEvent *event)
         //gg
         if (game->gameStatus==BLACKWIN||game->gameStatus==WHITEWIN||game->gameStatus==DRAW)
         {
+            PlaySound(TEXT("Resources/end.wav"),NULL,SND_FILENAME | SND_ASYNC);//音频
             if (game->gameStatus==DRAW) game->gameWindows->msg_Draw();
                 else game->gameWindows->msg_End(game->gameStatus,game->gameMode,game->AITurn);
             initGame();
@@ -330,6 +336,7 @@ void Widget::initGame()
 
 void Widget::initPvPGame()
 {
+    PlaySound(TEXT("Resources/click-botton.wav"),NULL,SND_FILENAME | SND_ASYNC);//音频
     mousePosPvP=false;
     game_mode=PvP;
     game->gameStatus=PLAYING;
@@ -340,6 +347,7 @@ void Widget::initPvPGame()
 
 void Widget::initPvEGame()//pve未启用
 {
+    PlaySound(TEXT("Resources/click-botton.wav"),NULL,SND_FILENAME | SND_ASYNC);//音频
     mousePosPvE=false;
     game_mode=PvE;
     game->gameStatus=PLAYING;
@@ -359,7 +367,8 @@ void Widget::chessByPerson()
     if (rightMousePos&&mousePosRow>=0&&mousePosRow<LINE_NUM
             &&mousePosCol>=0&&mousePosCol<LINE_NUM)
         game->move_in_chess(mousePosRow,mousePosCol);
-    update();
+    update();//画面
+    PlaySound(TEXT("Resources/move-in-chess.wav"),NULL,SND_FILENAME | SND_ASYNC);//音频
 }
 
 void Widget::chessByAI()
@@ -367,5 +376,6 @@ void Widget::chessByAI()
     int aiChessRow=-1,aiChessCol=-1;
     game->AIchess(&aiChessRow,&aiChessCol);
     game->move_in_chess(aiChessRow,aiChessCol);
-    update();
+    update();//画面
+    PlaySound(TEXT("Resources/move-in-chess.wav"),NULL,SND_FILENAME | SND_ASYNC);//音频
 }
