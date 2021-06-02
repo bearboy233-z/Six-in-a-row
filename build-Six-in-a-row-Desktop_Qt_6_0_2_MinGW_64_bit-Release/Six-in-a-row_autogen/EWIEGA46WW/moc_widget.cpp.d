@@ -19,11 +19,14 @@ E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Release/Six-in-
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qcontainerfwd.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qcontainerinfo.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qcontainertools_impl.h \
+  E:/Qt/6.0.2/mingw81_64/include/QtCore/qcontiguouscache.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qdatastream.h \
+  E:/Qt/6.0.2/mingw81_64/include/QtCore/qdebug.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qflags.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qgenericatomic.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qglobal.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qglobalstatic.h \
+  E:/Qt/6.0.2/mingw81_64/include/QtCore/qhash.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qhashfunctions.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qiodevicebase.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qiterable.h \
@@ -31,6 +34,7 @@ E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Release/Six-in-
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qline.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qlist.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qlogging.h \
+  E:/Qt/6.0.2/mingw81_64/include/QtCore/qmap.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qmargins.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qmath.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qmetacontainer.h \
@@ -49,12 +53,15 @@ E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Release/Six-in-
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qrect.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qrefcount.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qscopedpointer.h \
+  E:/Qt/6.0.2/mingw81_64/include/QtCore/qset.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qshareddata.h \
+  E:/Qt/6.0.2/mingw81_64/include/QtCore/qshareddata_impl.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qsharedpointer.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qsharedpointer_impl.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qsize.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qstring.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qstringalgorithms.h \
+  E:/Qt/6.0.2/mingw81_64/include/QtCore/qstringconverter.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qstringlist.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qstringliteral.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qstringmatcher.h \
@@ -64,11 +71,16 @@ E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Release/Six-in-
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qsystemdetection.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qtaggedpointer.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qtcore-config.h \
+  E:/Qt/6.0.2/mingw81_64/include/QtCore/qtextstream.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qtmetamacros.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qtypeinfo.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qutf8stringview.h \
+  E:/Qt/6.0.2/mingw81_64/include/QtCore/qvariant.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qvarlengtharray.h \
   E:/Qt/6.0.2/mingw81_64/include/QtCore/qversiontagging.h \
+  E:/Qt/6.0.2/mingw81_64/include/QtGui/QAction \
+  E:/Qt/6.0.2/mingw81_64/include/QtGui/QKeySequence \
+  E:/Qt/6.0.2/mingw81_64/include/QtGui/qaction.h \
   E:/Qt/6.0.2/mingw81_64/include/QtGui/qbitmap.h \
   E:/Qt/6.0.2/mingw81_64/include/QtGui/qbrush.h \
   E:/Qt/6.0.2/mingw81_64/include/QtGui/qcolor.h \
@@ -76,6 +88,7 @@ E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Release/Six-in-
   E:/Qt/6.0.2/mingw81_64/include/QtGui/qfont.h \
   E:/Qt/6.0.2/mingw81_64/include/QtGui/qfontinfo.h \
   E:/Qt/6.0.2/mingw81_64/include/QtGui/qfontmetrics.h \
+  E:/Qt/6.0.2/mingw81_64/include/QtGui/qicon.h \
   E:/Qt/6.0.2/mingw81_64/include/QtGui/qimage.h \
   E:/Qt/6.0.2/mingw81_64/include/QtGui/qkeysequence.h \
   E:/Qt/6.0.2/mingw81_64/include/QtGui/qpaintdevice.h \
@@ -91,9 +104,13 @@ E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Release/Six-in-
   E:/Qt/6.0.2/mingw81_64/include/QtGui/qtransform.h \
   E:/Qt/6.0.2/mingw81_64/include/QtGui/qwindowdefs.h \
   E:/Qt/6.0.2/mingw81_64/include/QtGui/qwindowdefs_win.h \
+  E:/Qt/6.0.2/mingw81_64/include/QtWidgets/QMenu \
+  E:/Qt/6.0.2/mingw81_64/include/QtWidgets/QMenuBar \
   E:/Qt/6.0.2/mingw81_64/include/QtWidgets/QMessageBox \
   E:/Qt/6.0.2/mingw81_64/include/QtWidgets/QWidget \
   E:/Qt/6.0.2/mingw81_64/include/QtWidgets/qdialog.h \
+  E:/Qt/6.0.2/mingw81_64/include/QtWidgets/qmenu.h \
+  E:/Qt/6.0.2/mingw81_64/include/QtWidgets/qmenubar.h \
   E:/Qt/6.0.2/mingw81_64/include/QtWidgets/qmessagebox.h \
   E:/Qt/6.0.2/mingw81_64/include/QtWidgets/qsizepolicy.h \
   E:/Qt/6.0.2/mingw81_64/include/QtWidgets/qtwidgets-config.h \

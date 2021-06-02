@@ -1,10 +1,15 @@
 #ifndef WIDGET_H
-#define WIDGET_H
 
 #include "GameModel.h"
 
 #include <QWidget>
 #include <QMessageBox>
+#include <QKeySequence>
+#include <QMenuBar>
+#include <QMenu>
+#include <QAction>
+
+#define WIDGET_H
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -48,5 +53,20 @@ private:
     void initGame();
     void initPvPGame();
     void initPvEGame();
+
+    //菜单栏
+    bool initMenuBar();
+    bool initGameMenu(QMenuBar* mb);
+    bool initActionMenu(QMenuBar* mb);
+    bool makeAction(QAction *&action,QString text,int key);
+
+    //槽函数
+private slots:
+    //菜单栏动作
+    void newGameAction();
+    void saveGameAction();
+    void loadGameAction();
+    void undoAction();
+    void tipAction();
 };
 #endif // WIDGET_H

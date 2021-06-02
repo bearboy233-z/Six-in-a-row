@@ -1,9 +1,10 @@
 #ifndef GAMEWINDOWS_H
-#define GAMEWINDOWS_H
 
 #include "BaseParameter.h"
 
 #include <QMessageBox>
+
+#define GAMEWINDOWS_H
 
 class GameWindows
 {

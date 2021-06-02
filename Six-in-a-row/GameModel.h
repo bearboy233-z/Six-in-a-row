@@ -1,8 +1,9 @@
 #ifndef GAMEMODEL_H
-#define GAMEMODEL_H
 
 #include "BaseParameter.h"
 #include "GameWindows.h"
+
+#define GAMEMODEL_H
 
 //gamemodel
 class GameModel

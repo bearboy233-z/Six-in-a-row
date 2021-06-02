@@ -43,5 +43,6 @@ const int CHESS_RADIUS=15;                      //棋子半径
 const int POS_OFFSET=BLOCK_SIZE*0.35;           //鼠标点击模糊判定上限
 const int MARK_SIZE=BLOCK_SIZE*0.4;             //鼠标点击提示标记大小
 const int MARK_CORNER=MARK_SIZE/4;              //鼠标点击提示角标大小
+const int MENU_HEIGHT=19;                       //菜单栏高度
 
 #endif // BASEPARAMETER_H

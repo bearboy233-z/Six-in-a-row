@@ -9,6 +9,7 @@
 #include <QThread>
 #include <windows.h>
 #include <Mmsystem.h>
+#include <QMenu>
 
 using namespace std;
 
@@ -22,12 +23,12 @@ Widget::Widget(QWidget *parent)
     setMouseTracking(true);
 
     //窗口大小
-    setFixedSize(EDGE*2+BLOCK_SIZE*BLOCK_NUM,EDGE*2+BLOCK_SIZE*BLOCK_NUM);
+    setFixedSize(EDGE*2+BLOCK_SIZE*BLOCK_NUM,EDGE*2+BLOCK_SIZE*BLOCK_NUM+MENU_HEIGHT);
 
     game=new GameModel;
     //初始化
+    initMenuBar();
     initGame();
-
 }
 
 Widget::~Widget()
@@ -47,15 +48,18 @@ void Widget::paintEvent(QPaintEvent *event)
     //设置棋盘背景
     QPixmap background("Resources/chessboard.jpg");
     painter.drawPixmap(this->rect(),background);
+    painter.setBrush(QColor(255,255,255,255));
+    painter.setPen(QPen(QColor(255,255,255,255),1));
+    painter.drawRect(0,0,size().width(),MENU_HEIGHT+2);
 
     //绘制网格线
     painter.setPen(QPen(Qt::black,2));
     for (int i=0;i<LINE_NUM;i++)
     {
         //竖线
-        painter.drawLine(EDGE+BLOCK_SIZE*i,EDGE,EDGE+BLOCK_SIZE*i,size().height()-EDGE);
+        painter.drawLine(EDGE+BLOCK_SIZE*i,EDGE+MENU_HEIGHT,EDGE+BLOCK_SIZE*i,size().height()-EDGE);
         //横线
-        painter.drawLine(EDGE,EDGE+BLOCK_SIZE*i,size().width()-EDGE,EDGE+BLOCK_SIZE*i);
+        painter.drawLine(EDGE,EDGE+BLOCK_SIZE*i+MENU_HEIGHT,size().width()-EDGE,EDGE+BLOCK_SIZE*i+MENU_HEIGHT);
     }
 
     //绘制棋子
@@ -64,11 +68,11 @@ void Widget::paintEvent(QPaintEvent *event)
     {
         if (game->chessPiece[i][j]==black){
             QPixmap black_chess("Resources/blackchess.png");
-            painter.drawPixmap(EDGE+j*BLOCK_SIZE-15,EDGE+i*BLOCK_SIZE-15,black_chess);
+            painter.drawPixmap(EDGE+j*BLOCK_SIZE-15,EDGE+i*BLOCK_SIZE-15+MENU_HEIGHT,black_chess);
         }
         if (game->chessPiece[i][j]==white){
             QPixmap white_chess("Resources/whitechess.png");
-            painter.drawPixmap(EDGE+j*BLOCK_SIZE-15,EDGE+i*BLOCK_SIZE-15,white_chess);
+            painter.drawPixmap(EDGE+j*BLOCK_SIZE-15,EDGE+i*BLOCK_SIZE-15+MENU_HEIGHT,white_chess);
         }
     }
 
@@ -76,7 +80,7 @@ void Widget::paintEvent(QPaintEvent *event)
     if (game->gameStatus!=PLAYING)
     {
         painter.setBrush(QColor(0,0,0,100));
-        painter.drawRect(0,0,size().width(),size().height());
+        painter.drawRect(0,MENU_HEIGHT+3,size().width(),size().height());
     }
 
     //绘制模式选择界面
@@ -86,57 +90,57 @@ void Widget::paintEvent(QPaintEvent *event)
         //背景
         painter.setBrush(QColor(255,255,255,233));
         painter.setPen(QColor(255,255,255,233));
-        painter.drawRect(size().width()*0.1,size().height()*0.2,size().width()*0.8,size().height()*0.5);
+        painter.drawRect(size().width()*0.1,size().height()*0.2+MENU_HEIGHT,size().width()*0.8,size().height()*0.5+MENU_HEIGHT);
         //文本
         painter.setPen(QColor(50,50,50,255));
         painter.setFont(QFont("宋体",30,87));
-        painter.drawText(size().width()*0.5-100,size().height()*0.35,"请选择模式");
+        painter.drawText(size().width()*0.5-100,size().height()*0.35+MENU_HEIGHT,"请选择模式");
         //选择按钮
         painter.setBrush(QColor(200,200,200,255));
         painter.setPen(QColor(180,180,180,255));
-        painter.drawRect(size().width()*0.5-200,size().height()*0.45,160,80);
-        painter.drawRect(size().width()*0.5+40,size().height()*0.45,160,80);
+        painter.drawRect(size().width()*0.5-200,size().height()*0.45+MENU_HEIGHT,160,80);
+        painter.drawRect(size().width()*0.5+40,size().height()*0.45+MENU_HEIGHT,160,80);
         painter.setPen(Qt::black);
         painter.setFont(QFont("Times New Roman",20,75));
-        painter.drawText(size().width()*0.5-200+50,size().height()*0.45+45,"P v P");
-        painter.drawText(size().width()*0.5+40+50,size().height()*0.45+45,"P v E");
+        painter.drawText(size().width()*0.5-200+50,size().height()*0.45+45+MENU_HEIGHT,"P v P");
+        painter.drawText(size().width()*0.5+40+50,size().height()*0.45+45+MENU_HEIGHT,"P v E");
         //阴影
         painter.setPen(QPen(QColor(100,100,100,200),3));
-        painter.drawLine(size().width()*0.5-200,size().height()*0.45+80,size().width()*0.5-200+160-1,size().height()*0.45+80);
-        painter.drawLine(size().width()*0.5-200+160,size().height()*0.45,size().width()*0.5-200+160,size().height()*0.45+80-1);
-        painter.drawLine(size().width()*0.5+40,size().height()*0.45+80,size().width()*0.5+40+160-1,size().height()*0.45+80);
-        painter.drawLine(size().width()*0.5+40+160,size().height()*0.45,size().width()*0.5+40+160,size().height()*0.45+80-1);
+        painter.drawLine(size().width()*0.5-200,size().height()*0.45+80+MENU_HEIGHT,size().width()*0.5-200+160-1,size().height()*0.45+80+MENU_HEIGHT);
+        painter.drawLine(size().width()*0.5-200+160,size().height()*0.45+MENU_HEIGHT,size().width()*0.5-200+160,size().height()*0.45+80-1+MENU_HEIGHT);
+        painter.drawLine(size().width()*0.5+40,size().height()*0.45+80+MENU_HEIGHT,size().width()*0.5+40+160-1,size().height()*0.45+80+MENU_HEIGHT);
+        painter.drawLine(size().width()*0.5+40+160,size().height()*0.45+MENU_HEIGHT,size().width()*0.5+40+160,size().height()*0.45+80-1+MENU_HEIGHT);
 
         //按钮选择提示
         if (mousePosPvP&&(!mouseClickPvP))
         {
             painter.setBrush(QColor(190,190,190,255));
             painter.setPen(QColor(180,180,180,255));
-            painter.drawRect(size().width()*0.5-200,size().height()*0.45,160,80);
+            painter.drawRect(size().width()*0.5-200,size().height()*0.45+MENU_HEIGHT,160,80);
             painter.setPen(Qt::black);
             painter.setFont(QFont("Times New Roman",20,75));
-            painter.drawText(size().width()*0.5-200+52,size().height()*0.45+47,"P v P");
+            painter.drawText(size().width()*0.5-200+52,size().height()*0.45+47+MENU_HEIGHT,"P v P");
             painter.setPen(QPen(QColor(100,100,100,200),2));
-            painter.drawLine(size().width()*0.5-200+1,size().height()*0.45+80,size().width()*0.5-200+160-1,size().height()*0.45+80);
-            painter.drawLine(size().width()*0.5-200+160,size().height()*0.45+1,size().width()*0.5-200+160,size().height()*0.45+80-1);
+            painter.drawLine(size().width()*0.5-200+1,size().height()*0.45+80+MENU_HEIGHT,size().width()*0.5-200+160-1,size().height()*0.45+80+MENU_HEIGHT);
+            painter.drawLine(size().width()*0.5-200+160,size().height()*0.45+1+MENU_HEIGHT,size().width()*0.5-200+160,size().height()*0.45+80-1+MENU_HEIGHT);
             painter.setPen(QPen(QColor(100,100,100,200),1));
-            painter.drawLine(size().width()*0.5-200,size().height()*0.45,size().width()*0.5-200+160-1,size().height()*0.45);
-            painter.drawLine(size().width()*0.5-200,size().height()*0.45,size().width()*0.5-200,size().height()*0.45+80-1);
+            painter.drawLine(size().width()*0.5-200,size().height()*0.45+MENU_HEIGHT,size().width()*0.5-200+160-1,size().height()*0.45+MENU_HEIGHT);
+            painter.drawLine(size().width()*0.5-200,size().height()*0.45+MENU_HEIGHT,size().width()*0.5-200,size().height()*0.45+80-1+MENU_HEIGHT);
         }
         if (mousePosPvE&&(!mouseClickPvE))
         {
             painter.setBrush(QColor(190,190,190,255));
             painter.setPen(QColor(180,180,180,255));
-            painter.drawRect(size().width()*0.5+40,size().height()*0.45,160,80);
+            painter.drawRect(size().width()*0.5+40,size().height()*0.45+MENU_HEIGHT,160,80);
             painter.setPen(Qt::black);
             painter.setFont(QFont("Times New Roman",20,75));
-            painter.drawText(size().width()*0.5+40+52,size().height()*0.45+47,"P v E");
+            painter.drawText(size().width()*0.5+40+52,size().height()*0.45+47+MENU_HEIGHT,"P v E");
             painter.setPen(QPen(QColor(100,100,100,200),2));
-            painter.drawLine(size().width()*0.5+40+1,size().height()*0.45+80,size().width()*0.5+40+160-1,size().height()*0.45+80);
-            painter.drawLine(size().width()*0.5+40+160,size().height()*0.45+1,size().width()*0.5+40+160,size().height()*0.45+80-1);
+            painter.drawLine(size().width()*0.5+40+1,size().height()*0.45+80+MENU_HEIGHT,size().width()*0.5+40+160-1,size().height()*0.45+80+MENU_HEIGHT);
+            painter.drawLine(size().width()*0.5+40+160,size().height()*0.45+1+MENU_HEIGHT,size().width()*0.5+40+160,size().height()*0.45+80-1+MENU_HEIGHT);
             painter.setPen(QPen(QColor(100,100,100,200),1));
-            painter.drawLine(size().width()*0.5+40,size().height()*0.45,size().width()*0.5+40+160-1,size().height()*0.45);
-            painter.drawLine(size().width()*0.5+40,size().height()*0.45,size().width()*0.5+40,size().height()*0.45+80-1);
+            painter.drawLine(size().width()*0.5+40,size().height()*0.45+MENU_HEIGHT,size().width()*0.5+40+160-1,size().height()*0.45+MENU_HEIGHT);
+            painter.drawLine(size().width()*0.5+40,size().height()*0.45+MENU_HEIGHT,size().width()*0.5+40,size().height()*0.45+80-1+MENU_HEIGHT);
         }
 
         //按钮点击提示
@@ -144,25 +148,25 @@ void Widget::paintEvent(QPaintEvent *event)
         {
             painter.setBrush(QColor(200,200,200,255));
             painter.setPen(QColor(180,180,180,255));
-            painter.drawRect(size().width()*0.5-200,size().height()*0.45,160,80);
+            painter.drawRect(size().width()*0.5-200,size().height()*0.45+MENU_HEIGHT,160,80);
             painter.setPen(Qt::black);
             painter.setFont(QFont("Times New Roman",20,75));
-            painter.drawText(size().width()*0.5-200+55,size().height()*0.45+50,"P v P");
+            painter.drawText(size().width()*0.5-200+55,size().height()*0.45+50+MENU_HEIGHT,"P v P");
             painter.setPen(QPen(QColor(100,100,100,200),3));
-            painter.drawLine(size().width()*0.5-200,size().height()*0.45,size().width()*0.5-200+160-1,size().height()*0.45);
-            painter.drawLine(size().width()*0.5-200,size().height()*0.45,size().width()*0.5-200,size().height()*0.45+80-1);
+            painter.drawLine(size().width()*0.5-200,size().height()*0.45+MENU_HEIGHT,size().width()*0.5-200+160-1,size().height()*0.45+MENU_HEIGHT);
+            painter.drawLine(size().width()*0.5-200,size().height()*0.45+MENU_HEIGHT,size().width()*0.5-200,size().height()*0.45+80-1+MENU_HEIGHT);
         }
         if (mousePosPvE&&mouseClickPvE)
         {
             painter.setBrush(QColor(200,200,200,255));
             painter.setPen(QColor(180,180,180,255));
-            painter.drawRect(size().width()*0.5+40,size().height()*0.45,160,80);
+            painter.drawRect(size().width()*0.5+40,size().height()*0.45+MENU_HEIGHT,160,80);
             painter.setPen(Qt::black);
             painter.setFont(QFont("Times New Roman",20,75));
-            painter.drawText(size().width()*0.5+40+55,size().height()*0.45+50,"P v E");
+            painter.drawText(size().width()*0.5+40+55,size().height()*0.45+50+MENU_HEIGHT,"P v E");
             painter.setPen(QPen(QColor(100,100,100,200),3));
-            painter.drawLine(size().width()*0.5+40,size().height()*0.45,size().width()*0.5+40+160-1,size().height()*0.45);
-            painter.drawLine(size().width()*0.5+40,size().height()*0.45,size().width()*0.5+40,size().height()*0.45+80-1);
+            painter.drawLine(size().width()*0.5+40,size().height()*0.45+MENU_HEIGHT,size().width()*0.5+40+160-1,size().height()*0.45+MENU_HEIGHT);
+            painter.drawLine(size().width()*0.5+40,size().height()*0.45+MENU_HEIGHT,size().width()*0.5+40,size().height()*0.45+80-1+MENU_HEIGHT);
         }
     }
 
@@ -173,14 +177,14 @@ void Widget::paintEvent(QPaintEvent *event)
     {
         if (game->playerTurn==blackturn) painter.setPen(QPen(Qt::black,1.5));
             else painter.setPen(QPen(Qt::darkGray,1.5));
-        painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE-MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE-MARK_SIZE,EDGE+mousePosCol*BLOCK_SIZE-MARK_SIZE+MARK_CORNER,EDGE+mousePosRow*BLOCK_SIZE-MARK_SIZE);
-        painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE-MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE-MARK_SIZE,EDGE+mousePosCol*BLOCK_SIZE-MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE-MARK_SIZE+MARK_CORNER);
-        painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE-MARK_SIZE,EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE-MARK_CORNER,EDGE+mousePosRow*BLOCK_SIZE-MARK_SIZE);
-        painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE-MARK_SIZE,EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE-MARK_SIZE+MARK_CORNER);
-        painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE-MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosCol*BLOCK_SIZE-MARK_SIZE+MARK_CORNER,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE);
-        painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE-MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosCol*BLOCK_SIZE-MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE-MARK_CORNER);
-        painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE-MARK_CORNER,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE);
-        painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE-MARK_CORNER);
+        painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE-MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT,EDGE+mousePosCol*BLOCK_SIZE-MARK_SIZE+MARK_CORNER,EDGE+mousePosRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT);
+        painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE-MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT,EDGE+mousePosCol*BLOCK_SIZE-MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE-MARK_SIZE+MARK_CORNER+MENU_HEIGHT);
+        painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT,EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE-MARK_CORNER,EDGE+mousePosRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT);
+        painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT,EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE-MARK_SIZE+MARK_CORNER+MENU_HEIGHT);
+        painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE-MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT,EDGE+mousePosCol*BLOCK_SIZE-MARK_SIZE+MARK_CORNER,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT);
+        painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE-MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT,EDGE+mousePosCol*BLOCK_SIZE-MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE-MARK_CORNER+MENU_HEIGHT);
+        painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT,EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE-MARK_CORNER,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT);
+        painter.drawLine(EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT,EDGE+mousePosCol*BLOCK_SIZE+MARK_SIZE,EDGE+mousePosRow*BLOCK_SIZE+MARK_SIZE-MARK_CORNER+MENU_HEIGHT);
     }
     }
 
@@ -198,10 +202,10 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
         mousePosPvP=false;
         mousePosPvE=false;
         if (x>size().width()*0.5-200&&x<size().width()*0.5-200+160&&
-                y>size().height()*0.45&&y<size().height()*0.45+80)
+                y>size().height()*0.45+MENU_HEIGHT&&y<size().height()*0.45+80+MENU_HEIGHT)
             mousePosPvP=true;
         if (x>size().width()*0.5+40&&x<size().width()*0.5+40+160&&
-                y>size().height()*0.45&&y<size().height()*0.45+80)
+                y>size().height()*0.45+MENU_HEIGHT&&y<size().height()*0.45+80+MENU_HEIGHT)
             mousePosPvE=true;
         update();
     }
@@ -211,13 +215,13 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
     if (game->gameStatus==PLAYING)
     {
     if (x>EDGE-BLOCK_SIZE*0.5&&x<size().width()-EDGE+BLOCK_SIZE*0.5&&
-            y>EDGE-BLOCK_SIZE*0.5&&y<size().height()-EDGE+BLOCK_SIZE*0.5)
+            y>EDGE-BLOCK_SIZE*0.5+MENU_HEIGHT&&y<size().height()-EDGE+BLOCK_SIZE*0.5)
     {
         int col=(x-EDGE)/BLOCK_SIZE;
-        int row=(y-EDGE)/BLOCK_SIZE;
+        int row=(y-EDGE-MENU_HEIGHT)/BLOCK_SIZE;
         rightMousePos=false;
 
-        if (GameModel::len(x,y,EDGE+col*BLOCK_SIZE,EDGE+row*BLOCK_SIZE)<=POS_OFFSET)
+        if (GameModel::len(x,y,EDGE+col*BLOCK_SIZE,EDGE+row*BLOCK_SIZE+MENU_HEIGHT)<=POS_OFFSET)
         {
             mousePosCol=col;
             mousePosRow=row;
@@ -225,7 +229,7 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
                 rightMousePos=true;
         }
 
-        if (GameModel::len(x,y,EDGE+(col+1)*BLOCK_SIZE,EDGE+row*BLOCK_SIZE)<=POS_OFFSET)
+        if (GameModel::len(x,y,EDGE+(col+1)*BLOCK_SIZE,EDGE+row*BLOCK_SIZE+MENU_HEIGHT)<=POS_OFFSET)
         {
             mousePosCol=col+1;
             mousePosRow=row;
@@ -233,7 +237,7 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
                 rightMousePos=true;
         }
 
-        if (GameModel::len(x,y,EDGE+col*BLOCK_SIZE,EDGE+(row+1)*BLOCK_SIZE)<=POS_OFFSET)
+        if (GameModel::len(x,y,EDGE+col*BLOCK_SIZE,EDGE+(row+1)*BLOCK_SIZE+MENU_HEIGHT)<=POS_OFFSET)
         {
             mousePosCol=col;
             mousePosRow=row+1;
@@ -241,7 +245,7 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
                 rightMousePos=true;
         }
 
-        if (GameModel::len(x,y,EDGE+(col+1)*BLOCK_SIZE,EDGE+(row+1)*BLOCK_SIZE)<=POS_OFFSET)
+        if (GameModel::len(x,y,EDGE+(col+1)*BLOCK_SIZE,EDGE+(row+1)*BLOCK_SIZE+MENU_HEIGHT)<=POS_OFFSET)
         {
             mousePosCol=col+1;
             mousePosRow=row+1;
@@ -378,4 +382,117 @@ void Widget::chessByAI()
     game->move_in_chess(aiChessRow,aiChessCol);
     update();//画面
     PlaySound(TEXT("Resources/move-in-chess.wav"),NULL,SND_FILENAME | SND_ASYNC);//音频
+}
+
+bool Widget::initMenuBar()
+{
+    bool ret=true;
+    QMenuBar *mb=new QMenuBar(this);
+    ret=ret&&initGameMenu(mb);
+    ret=ret&&initActionMenu(mb);
+    return ret;
+}
+
+bool Widget::initGameMenu(QMenuBar *mb)
+{
+    QMenu *menu=new QMenu("游戏(&G)");
+    bool ret=(menu!=NULL);
+        if (ret)
+        {
+            QAction *action=NULL;
+            ret=ret&&makeAction(action,"新游戏(&N)",Qt::CTRL+Qt::Key_N);
+            if (ret)
+            {
+                connect(action,&QAction::triggered,this,&Widget::newGameAction);
+                menu->addAction(action);    // add Action item to Menu
+            }
+            menu->addSeparator();
+            ret=ret&&makeAction(action,"保存游戏(&S)",Qt::CTRL+Qt::Key_S);
+            if (ret)
+            {
+                menu->addAction(action);    // add Action item to Menu
+            }
+            ret=ret&&makeAction(action,"载入游戏(&L)",Qt::CTRL+Qt::Key_L);
+            if (ret)
+            {
+                menu->addAction(action);    // add Action item to Menu
+            }
+        }
+        if (ret)
+        {
+            mb->addMenu(menu);    // add Menu add to application Menu Bar
+        }
+        else {
+            delete menu;
+        }
+        return ret;
+}
+
+bool Widget::makeAction(QAction *&action,QString text,int key)
+{
+    bool ret=true;
+    action=new QAction(text,NULL);
+    if (action!=NULL)
+    {
+        action->setShortcut(QKeySequence(key));
+    }
+    else
+    {
+        ret=false;
+    }
+    return ret;
+}
+
+bool Widget::initActionMenu(QMenuBar* mb)
+{
+    QMenu *menu=new QMenu("操作(&A)");
+    bool ret=(menu!=NULL);
+    if (ret)
+    {
+        QAction *action=NULL;
+        ret=ret&&makeAction(action,"悔棋(&U)",Qt::CTRL+Qt::Key_Z);
+        if(ret)
+        {
+            menu->addAction(action);
+        }
+        ret=ret&&makeAction(action,"提示(&T)",Qt::CTRL+Qt::Key_T);
+        if (ret)
+        {
+            menu->addAction(action);
+        }
+    }
+    if (ret)
+    {
+        mb->addMenu(menu);
+    }
+    else
+    {
+        delete menu;
+    }
+    return ret;
+}
+
+void Widget::newGameAction()
+{
+    initGame();
+}
+
+void Widget::saveGameAction()
+{
+    //
+}
+
+void Widget::loadGameAction()
+{
+    //
+}
+
+void Widget::undoAction()
+{
+    //
+}
+
+void Widget::tipAction()
+{
+    //
 }
