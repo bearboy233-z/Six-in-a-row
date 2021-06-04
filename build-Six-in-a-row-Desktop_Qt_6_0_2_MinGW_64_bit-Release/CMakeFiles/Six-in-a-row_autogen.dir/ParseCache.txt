@@ -6,6 +6,7 @@ E:/Six-in-a-row/Six-in-a-row/widget.h
  mmc:Q_OBJECT
  mdp:E:/Six-in-a-row/Six-in-a-row/widget.h
  mdp:E:/Six-in-a-row/build-Six-in-a-row-Desktop_Qt_6_0_2_MinGW_64_bit-Release/Six-in-a-row_autogen/moc_predefs.h
+ mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/QString
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qalgorithms.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qanystringview.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qarraydata.h
@@ -18,6 +19,7 @@ E:/Six-in-a-row/Six-in-a-row/widget.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qbytearrayalgorithms.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qbytearraylist.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qbytearrayview.h
+ mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qcalendar.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qchar.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qcompare.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qcompilerdetection.h
@@ -27,18 +29,25 @@ E:/Six-in-a-row/Six-in-a-row/widget.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qcontainertools_impl.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qcontiguouscache.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qdatastream.h
+ mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qdatetime.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qdebug.h
+ mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qdir.h
+ mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qfile.h
+ mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qfiledevice.h
+ mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qfileinfo.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qflags.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qgenericatomic.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qglobal.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qglobalstatic.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qhash.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qhashfunctions.h
+ mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qiodevice.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qiodevicebase.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qiterable.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qiterator.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qline.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qlist.h
+ mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qlocale.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qlogging.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qmap.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qmargins.h
@@ -80,6 +89,7 @@ E:/Six-in-a-row/Six-in-a-row/widget.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qtextstream.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qtmetamacros.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qtypeinfo.h
+ mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qurl.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qutf8stringview.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qvariant.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtCore/qvarlengtharray.h
@@ -110,11 +120,13 @@ E:/Six-in-a-row/Six-in-a-row/widget.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtGui/qtransform.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtGui/qwindowdefs.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtGui/qwindowdefs_win.h
+ mdp:E:/Qt/6.0.2/mingw81_64/include/QtWidgets/QFileDialog
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtWidgets/QMenu
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtWidgets/QMenuBar
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtWidgets/QMessageBox
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtWidgets/QWidget
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtWidgets/qdialog.h
+ mdp:E:/Qt/6.0.2/mingw81_64/include/QtWidgets/qfiledialog.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtWidgets/qmenu.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtWidgets/qmenubar.h
  mdp:E:/Qt/6.0.2/mingw81_64/include/QtWidgets/qmessagebox.h

@@ -8,6 +8,8 @@
 #include <QMenuBar>
 #include <QMenu>
 #include <QAction>
+#include <QFileDialog>
+#include <QString>
 
 #define WIDGET_H
 

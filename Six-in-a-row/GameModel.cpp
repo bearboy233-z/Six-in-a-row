@@ -25,7 +25,14 @@ void GameModel::startGame(GameMode mode)
 void GameModel::move_in_chess(int row, int col)
 {
     if (!(row>=0&&row<LINE_NUM&&col>=0&&col<LINE_NUM)) return;
+    if (!AITurn) lastNum=chessNum;
     chessNum++;
+    if (!AITurn)
+    {
+    for (int i=0;i<LINE_NUM;i++)
+    for (int j=0;j<LINE_NUM;j++)
+        lastPiece[i][j]=chessPiece[i][j];
+    }
     if (playerTurn==blackturn) chessPiece[row][col]=black;
     if (playerTurn==whiteturn) chessPiece[row][col]=white;
     judge(row,col);

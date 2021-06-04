@@ -10,6 +10,10 @@
 #include <windows.h>
 #include <Mmsystem.h>
 #include <QMenu>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -410,11 +414,13 @@ bool Widget::initGameMenu(QMenuBar *mb)
             ret=ret&&makeAction(action,"保存游戏(&S)",Qt::CTRL+Qt::Key_S);
             if (ret)
             {
+                connect(action,&QAction::triggered,this,&Widget::saveGameAction);
                 menu->addAction(action);    // add Action item to Menu
             }
             ret=ret&&makeAction(action,"载入游戏(&L)",Qt::CTRL+Qt::Key_L);
             if (ret)
             {
+                connect(action,&QAction::triggered,this,&Widget::loadGameAction);
                 menu->addAction(action);    // add Action item to Menu
             }
         }
@@ -453,11 +459,13 @@ bool Widget::initActionMenu(QMenuBar* mb)
         ret=ret&&makeAction(action,"悔棋(&U)",Qt::CTRL+Qt::Key_Z);
         if(ret)
         {
+            connect(action,&QAction::triggered,this,&Widget::undoAction);
             menu->addAction(action);
         }
         ret=ret&&makeAction(action,"提示(&T)",Qt::CTRL+Qt::Key_T);
         if (ret)
         {
+            connect(action,&QAction::triggered,this,&Widget::tipAction);
             menu->addAction(action);
         }
     }
@@ -479,17 +487,145 @@ void Widget::newGameAction()
 
 void Widget::saveGameAction()
 {
-    //
+    //定义文件对话框类
+    QFileDialog *fileDialog = new QFileDialog(this);
+    fileDialog->setAcceptMode(QFileDialog::AcceptSave);
+    //定义文件对话框标题
+    fileDialog->setWindowTitle(tr("保存游戏"));
+    //设置默认文件路径
+    fileDialog->setDirectory("./Saves");
+    //设置文件过滤器
+    fileDialog->setNameFilter(tr("Save(*.sav)"));
+    //设置视图模式
+    fileDialog->setViewMode(QFileDialog::Detail);
+
+    string path;
+    if (fileDialog->exec())
+    {
+        QString filename=fileDialog->selectedFiles()[0];
+        path=filename.toStdString();
+    }
+
+    if (path=="") return;
+    ofstream outfile(path,ios::out | ios::trunc);
+    outfile<<game->gameMode<<endl;
+    outfile<<game->gameStatus<<endl;
+    outfile<<game->playerTurn<<endl;
+    outfile<<game->AITurn<<endl;
+    outfile<<game->chessNum<<endl;
+    for (int i=0;i<LINE_NUM;i++)
+    {
+        for (int j=0;j<LINE_NUM-1;j++)
+            outfile<<game->chessPiece[i][j]<<' ';
+        outfile<<game->chessPiece[i][LINE_NUM-1]<<endl;
+    }
+    outfile.close();
 }
 
 void Widget::loadGameAction()
 {
-    //
+    //定义文件对话框类
+    QFileDialog *fileDialog = new QFileDialog(this);
+    fileDialog->setAcceptMode(QFileDialog::AcceptOpen);
+    //定义文件对话框标题
+    fileDialog->setWindowTitle(tr("载入游戏"));
+    //设置默认文件路径
+    fileDialog->setDirectory("./Saves");
+    //设置文件过滤器
+    fileDialog->setNameFilter(tr("Save(*.sav)"));
+    //设置视图模式
+    fileDialog->setViewMode(QFileDialog::Detail);
+
+    string path="";
+    if (fileDialog->exec())
+    {
+        QString filename=fileDialog->selectedFiles()[0];
+        path=filename.toStdString();
+    }
+
+        if (path=="") return;
+        ifstream infile(path,ios::in);
+        if (!infile) {
+            QMessageBox::warning(this,tr("错误"),tr("打开文件失败"));
+            return;
+        }
+        int temp=0;
+        if (!(infile>>temp)) return;
+        switch (temp)
+        {
+        case 0 : game->gameMode=unknownMode; break;
+        case 1 : game->gameMode=PvP; break;
+        case 2 : game->gameMode=PvE; break;
+        default: game->gameMode=unknownMode; break;
+        }
+        infile>>temp;
+        switch (temp)
+        {
+        case 0 : game->gameStatus=unknownStatus; break;
+        case 1 : game->gameStatus=PLAYING; break;
+        case 2 : game->gameStatus=BLACKWIN; break;
+        case 3 : game->gameStatus=WHITEWIN; break;
+        case 4 : game->gameStatus=DRAW; break;
+        default: game->gameStatus=unknownStatus; break;
+        }
+        infile>>temp;
+        switch (temp)
+        {
+        case 0 : game->playerTurn=blackturn; break;
+        case 1 : game->playerTurn=whiteturn; break;
+        default: game->playerTurn=blackturn; break;
+        }
+        infile>>game->AITurn;
+        infile>>game->chessNum;
+        for (int i=0;i<LINE_NUM;i++)
+        {
+            for (int j=0;j<LINE_NUM;j++)
+            {
+                infile>>temp;
+                switch (temp)
+                {
+                case 0 : game->chessPiece[i][j]=null; break;
+                case 1 : game->chessPiece[i][j]=black; break;
+                case 2 : game->chessPiece[i][j]=white; break;
+                default: game->chessPiece[i][j]=null; break;
+                }
+            }
+        }
+        infile.close();
 }
 
 void Widget::undoAction()
 {
-    //
+    if (game->gameStatus!=PLAYING)
+    {
+        QMessageBox::warning(this,tr("错误"),tr("无法悔棋"));
+        return;
+    }
+    if (game->chessNum==game->lastNum||(game->gameMode==PvP&&game->chessNum==0)||(game->gameMode==PvE&&game->chessNum<=1))
+    {
+        QMessageBox::warning(this,tr("错误"),tr("无法继续悔棋"));
+        return;
+    }
+    if (game->gameMode==PvP)
+    {
+        if (game->playerTurn==blackturn) game->playerTurn=whiteturn;
+            else game->playerTurn=blackturn;
+        game->chessNum=game->lastNum;
+        for (int i=0;i<LINE_NUM;i++)
+        for (int j=0;j<LINE_NUM;j++)
+            game->chessPiece[i][j]=game->lastPiece[i][j];
+        update();
+        return;
+    }
+    if (game->gameMode==PvE)
+    {
+        game->chessNum=game->lastNum;
+        for (int i=0;i<LINE_NUM;i++)
+        for (int j=0;j<LINE_NUM;j++)
+            game->chessPiece[i][j]=game->lastPiece[i][j];
+        update();
+        return;
+    }
 }
 
 void Widget::tipAction()

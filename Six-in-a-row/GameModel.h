@@ -25,6 +25,7 @@ class GameModel
 
         //棋盘落子情况
         ChessPiece chessPiece[LINE_NUM][LINE_NUM]={null};
+        ChessPiece lastPiece[LINE_NUM][LINE_NUM]={null};
 
         //<ai>轮到ai
         bool AITurn=false;
@@ -34,6 +35,7 @@ class GameModel
 
         //落子总数
         int chessNum=0;
+        int lastNum=0;
 
         //启动游戏
         void startGame(GameMode mode);
