@@ -192,6 +192,41 @@ void Widget::paintEvent(QPaintEvent *event)
     }
     }
 
+    //AI上一步落子位置标记
+    if (game->gameStatus==PLAYING&&game->gameMode==PvE&&game->chessNum>=1)
+    {
+    if (aiChessRow>=0&&aiChessRow<LINE_NUM&&aiChessCol>=0&&aiChessCol<LINE_NUM)
+    {
+        if (game->playerTurn==whiteturn) painter.setPen(QPen(Qt::black,1.5));
+            else painter.setPen(QPen(Qt::darkGray,1.5));
+        painter.drawLine(EDGE+aiChessCol*BLOCK_SIZE-MARK_SIZE,EDGE+aiChessRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT,EDGE+aiChessCol*BLOCK_SIZE-MARK_SIZE+MARK_CORNER,EDGE+aiChessRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT);
+        painter.drawLine(EDGE+aiChessCol*BLOCK_SIZE-MARK_SIZE,EDGE+aiChessRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT,EDGE+aiChessCol*BLOCK_SIZE-MARK_SIZE,EDGE+aiChessRow*BLOCK_SIZE-MARK_SIZE+MARK_CORNER+MENU_HEIGHT);
+        painter.drawLine(EDGE+aiChessCol*BLOCK_SIZE+MARK_SIZE,EDGE+aiChessRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT,EDGE+aiChessCol*BLOCK_SIZE+MARK_SIZE-MARK_CORNER,EDGE+aiChessRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT);
+        painter.drawLine(EDGE+aiChessCol*BLOCK_SIZE+MARK_SIZE,EDGE+aiChessRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT,EDGE+aiChessCol*BLOCK_SIZE+MARK_SIZE,EDGE+aiChessRow*BLOCK_SIZE-MARK_SIZE+MARK_CORNER+MENU_HEIGHT);
+        painter.drawLine(EDGE+aiChessCol*BLOCK_SIZE-MARK_SIZE,EDGE+aiChessRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT,EDGE+aiChessCol*BLOCK_SIZE-MARK_SIZE+MARK_CORNER,EDGE+aiChessRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT);
+        painter.drawLine(EDGE+aiChessCol*BLOCK_SIZE-MARK_SIZE,EDGE+aiChessRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT,EDGE+aiChessCol*BLOCK_SIZE-MARK_SIZE,EDGE+aiChessRow*BLOCK_SIZE+MARK_SIZE-MARK_CORNER+MENU_HEIGHT);
+        painter.drawLine(EDGE+aiChessCol*BLOCK_SIZE+MARK_SIZE,EDGE+aiChessRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT,EDGE+aiChessCol*BLOCK_SIZE+MARK_SIZE-MARK_CORNER,EDGE+aiChessRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT);
+        painter.drawLine(EDGE+aiChessCol*BLOCK_SIZE+MARK_SIZE,EDGE+aiChessRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT,EDGE+aiChessCol*BLOCK_SIZE+MARK_SIZE,EDGE+aiChessRow*BLOCK_SIZE+MARK_SIZE-MARK_CORNER+MENU_HEIGHT);
+    }
+    }
+
+    //提示可落子位置标记
+    if (game->gameStatus==PLAYING)
+    {
+    if (iftip)
+    {
+        if (game->playerTurn==blackturn) painter.setPen(QPen(Qt::black,1.5));
+            else painter.setPen(QPen(Qt::darkGray,1.5));
+        painter.drawLine(EDGE+tipChessCol*BLOCK_SIZE-MARK_SIZE,EDGE+tipChessRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT,EDGE+tipChessCol*BLOCK_SIZE-MARK_SIZE+MARK_CORNER,EDGE+tipChessRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT);
+        painter.drawLine(EDGE+tipChessCol*BLOCK_SIZE-MARK_SIZE,EDGE+tipChessRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT,EDGE+tipChessCol*BLOCK_SIZE-MARK_SIZE,EDGE+tipChessRow*BLOCK_SIZE-MARK_SIZE+MARK_CORNER+MENU_HEIGHT);
+        painter.drawLine(EDGE+tipChessCol*BLOCK_SIZE+MARK_SIZE,EDGE+tipChessRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT,EDGE+tipChessCol*BLOCK_SIZE+MARK_SIZE-MARK_CORNER,EDGE+tipChessRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT);
+        painter.drawLine(EDGE+tipChessCol*BLOCK_SIZE+MARK_SIZE,EDGE+tipChessRow*BLOCK_SIZE-MARK_SIZE+MENU_HEIGHT,EDGE+tipChessCol*BLOCK_SIZE+MARK_SIZE,EDGE+tipChessRow*BLOCK_SIZE-MARK_SIZE+MARK_CORNER+MENU_HEIGHT);
+        painter.drawLine(EDGE+tipChessCol*BLOCK_SIZE-MARK_SIZE,EDGE+tipChessRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT,EDGE+tipChessCol*BLOCK_SIZE-MARK_SIZE+MARK_CORNER,EDGE+tipChessRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT);
+        painter.drawLine(EDGE+tipChessCol*BLOCK_SIZE-MARK_SIZE,EDGE+tipChessRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT,EDGE+tipChessCol*BLOCK_SIZE-MARK_SIZE,EDGE+tipChessRow*BLOCK_SIZE+MARK_SIZE-MARK_CORNER+MENU_HEIGHT);
+        painter.drawLine(EDGE+tipChessCol*BLOCK_SIZE+MARK_SIZE,EDGE+tipChessRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT,EDGE+tipChessCol*BLOCK_SIZE+MARK_SIZE-MARK_CORNER,EDGE+tipChessRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT);
+        painter.drawLine(EDGE+tipChessCol*BLOCK_SIZE+MARK_SIZE,EDGE+tipChessRow*BLOCK_SIZE+MARK_SIZE+MENU_HEIGHT,EDGE+tipChessCol*BLOCK_SIZE+MARK_SIZE,EDGE+tipChessRow*BLOCK_SIZE+MARK_SIZE-MARK_CORNER+MENU_HEIGHT);
+    }
+    }
 }
 
 //鼠标选择
@@ -337,15 +372,21 @@ void Widget::initGame()
     srand(time(0));
     game->gameStatus=unknownStatus;
     game->gameMode=unknownMode;
-    mouseClickPvP=false;
-    mouseClickPvE=false;
+
+    mousePosRow=-1; mousePosCol=-1;
+    aiChessRow=-1; aiChessCol=-1;
+    tipChessRow=-1; tipChessCol=-1;
+    rightMousePos=false;
+    mousePosPvP=false; mousePosPvE=false;
+    mouseClickPvP=false; mouseClickPvE=false;
+    iftip=false;
+
     update();
 }
 
 void Widget::initPvPGame()
 {
     PlaySound(TEXT("Resources/click-botton.wav"),NULL,SND_FILENAME | SND_ASYNC);//音频
-    mousePosPvP=false;
     game_mode=PvP;
     game->gameStatus=PLAYING;
     game->AITurn=false;
@@ -356,7 +397,6 @@ void Widget::initPvPGame()
 void Widget::initPvEGame()//pve未启用
 {
     PlaySound(TEXT("Resources/click-botton.wav"),NULL,SND_FILENAME | SND_ASYNC);//音频
-    mousePosPvE=false;
     game_mode=PvE;
     game->gameStatus=PLAYING;
     game->AITurn=false;
@@ -376,15 +416,17 @@ void Widget::chessByPerson()
             &&mousePosCol>=0&&mousePosCol<LINE_NUM)
         game->move_in_chess(mousePosRow,mousePosCol);
     update();//画面
+    iftip=false;
     PlaySound(TEXT("Resources/move-in-chess.wav"),NULL,SND_FILENAME | SND_ASYNC);//音频
 }
 
 void Widget::chessByAI()
 {
-    int aiChessRow=-1,aiChessCol=-1;
+    aiChessRow=-1,aiChessCol=-1;
     game->AIchess(&aiChessRow,&aiChessCol);
     game->move_in_chess(aiChessRow,aiChessCol);
     update();//画面
+    iftip=false;
     PlaySound(TEXT("Resources/move-in-chess.wav"),NULL,SND_FILENAME | SND_ASYNC);//音频
 }
 
@@ -543,55 +585,62 @@ void Widget::loadGameAction()
         path=filename.toStdString();
     }
 
-        if (path=="") return;
-        ifstream infile(path,ios::in);
-        if (!infile) {
-            QMessageBox::warning(this,tr("错误"),tr("打开文件失败"));
-            return;
-        }
-        int temp=0;
-        if (!(infile>>temp)) return;
-        switch (temp)
-        {
+    if (path=="") return;
+    ifstream infile(path,ios::in);
+    if (!infile) {
+        QMessageBox::warning(this,tr("错误"),tr("打开文件失败"));
+        return;
+    }
+    int temp=0;
+    if (!(infile>>temp)) return;
+    switch (temp)
+    {
         case 0 : game->gameMode=unknownMode; break;
         case 1 : game->gameMode=PvP; break;
         case 2 : game->gameMode=PvE; break;
         default: game->gameMode=unknownMode; break;
-        }
-        infile>>temp;
-        switch (temp)
-        {
+    }
+    infile>>temp;
+    switch (temp)
+    {
         case 0 : game->gameStatus=unknownStatus; break;
         case 1 : game->gameStatus=PLAYING; break;
         case 2 : game->gameStatus=BLACKWIN; break;
         case 3 : game->gameStatus=WHITEWIN; break;
         case 4 : game->gameStatus=DRAW; break;
         default: game->gameStatus=unknownStatus; break;
-        }
-        infile>>temp;
-        switch (temp)
-        {
+    }
+    infile>>temp;
+    switch (temp)
+    {
         case 0 : game->playerTurn=blackturn; break;
         case 1 : game->playerTurn=whiteturn; break;
         default: game->playerTurn=blackturn; break;
-        }
-        infile>>game->AITurn;
-        infile>>game->chessNum;
-        for (int i=0;i<LINE_NUM;i++)
+    }
+    infile>>game->AITurn;
+    infile>>game->chessNum;
+    for (int i=0;i<LINE_NUM;i++)
+    {
+        for (int j=0;j<LINE_NUM;j++)
         {
-            for (int j=0;j<LINE_NUM;j++)
+            infile>>temp;
+            switch (temp)
             {
-                infile>>temp;
-                switch (temp)
-                {
                 case 0 : game->chessPiece[i][j]=null; break;
                 case 1 : game->chessPiece[i][j]=black; break;
                 case 2 : game->chessPiece[i][j]=white; break;
                 default: game->chessPiece[i][j]=null; break;
-                }
             }
         }
-        infile.close();
+    }
+    infile.close();
+    mousePosRow=-1; mousePosCol=-1;
+    aiChessRow=-1; aiChessCol=-1;
+    tipChessRow=-1; tipChessCol=-1;
+    rightMousePos=false;
+    mousePosPvP=false; mousePosPvE=false;
+    mouseClickPvP=false; mouseClickPvE=false;
+    iftip=false;
 }
 
 void Widget::undoAction()
@@ -614,6 +663,13 @@ void Widget::undoAction()
         for (int i=0;i<LINE_NUM;i++)
         for (int j=0;j<LINE_NUM;j++)
             game->chessPiece[i][j]=game->lastPiece[i][j];
+        mousePosRow=-1; mousePosCol=-1;
+        aiChessRow=-1; aiChessCol=-1;
+        tipChessRow=-1; tipChessCol=-1;
+        rightMousePos=false;
+        mousePosPvP=false; mousePosPvE=false;
+        mouseClickPvP=false; mouseClickPvE=false;
+        iftip=false;
         update();
         return;
     }
@@ -623,6 +679,13 @@ void Widget::undoAction()
         for (int i=0;i<LINE_NUM;i++)
         for (int j=0;j<LINE_NUM;j++)
             game->chessPiece[i][j]=game->lastPiece[i][j];
+        mousePosRow=-1; mousePosCol=-1;
+        aiChessRow=-1; aiChessCol=-1;
+        tipChessRow=-1; tipChessCol=-1;
+        rightMousePos=false;
+        mousePosPvP=false; mousePosPvE=false;
+        mouseClickPvP=false; mouseClickPvE=false;
+        iftip=false;
         update();
         return;
     }
@@ -630,5 +693,7 @@ void Widget::undoAction()
 
 void Widget::tipAction()
 {
-    //
+    tipChessRow=-1; tipChessCol=-1;
+    game->AIchess(&tipChessRow,&tipChessCol);
+    iftip=true;
 }

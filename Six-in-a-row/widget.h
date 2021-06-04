@@ -33,9 +33,12 @@ private:
 
     //鼠标
     int mousePosRow=-1,mousePosCol=-1;//鼠标所在行列
+    int aiChessRow=-1,aiChessCol=-1;//AI下棋所在行列
+    int tipChessRow=-1,tipChessCol=-1;//提示下棋所在行列
     bool rightMousePos=false;//是否是合法的选中位置
     bool mousePosPvP=false,mousePosPvE=false;//鼠标在按钮上
     bool mouseClickPvP=false,mouseClickPvE=false;//鼠标点击按钮
+    bool iftip=false;//需要提示
 
     //绘制
     void paintEvent(QPaintEvent *event);
